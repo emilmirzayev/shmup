@@ -25,6 +25,7 @@ YELLOW = (255, 255, 0)
 pygame.mixer.pre_init(44100, -16, 1, 512) # in order not to have sound delay
 pygame.init()
 
+
 # initialializing the sound
 pygame.mixer.init()
 
