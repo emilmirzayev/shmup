@@ -5,6 +5,10 @@ import pygame
 import random
 from os import path
 
+# checking for executable file generation
+if getattr(sys, 'frozen', False):
+    os.chdir(sys._MEIPASS)
+
 img_dir = path.join(path.dirname(__file__), "img")
 snd_dir = path.join(path.dirname(__file__), "snd")
 
