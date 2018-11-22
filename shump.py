@@ -4,7 +4,7 @@
 import pygame
 import random
 from os import path
-
+import sys
 # checking for executable file generation
 if getattr(sys, 'frozen', False):
     os.chdir(sys._MEIPASS)
@@ -91,6 +91,7 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(player_img, (50, 38))
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
+        
         self.radius = 20
         # pygame.draw.circle(self.image, RED, self.rect.center, self.radius)
         self.rect.centerx = WIDTH / 2
@@ -144,13 +145,24 @@ class Player(pygame.sprite.Sprite):
                 all_sprites.add(bullet)
                 bullets.add(bullet)
                 shoot_sound.play()
-            if self.power >= 2:
+            if self.power == 2:
                 bullet1 = Bullet(self.rect.left, self.rect.centery)
                 bullet2 = Bullet(self.rect.right, self.rect.centery)
                 all_sprites.add(bullet1)
                 all_sprites.add(bullet2)
                 bullets.add(bullet1)
                 bullets.add(bullet2)
+                shoot_sound.play()
+            if self.power >= 3:
+                bullet1 = Bullet(self.rect.left, self.rect.centery)
+                bullet2 = Bullet(self.rect.right, self.rect.centery)
+                bullet3 = Bullet(self.rect.centerx, self.rect.top)
+                all_sprites.add(bullet1)
+                all_sprites.add(bullet2)
+                all_sprites.add(bullet3)
+                bullets.add(bullet1)
+                bullets.add(bullet2)
+                bullets.add(bullet3)
                 shoot_sound.play()
     def hide(self):
         # hide the player temporarily
@@ -358,7 +370,7 @@ while running:
         random.choice(expl_sounds).play()
         expl = Explosion(hit.rect.center, "lg")
         all_sprites.add(expl)
-        if random.random() > 0.9:
+        if random.random() > 0.1:
             powerup = Powerup(hit.rect.center)
             all_sprites.add(powerup)
             powerups.add(powerup)
